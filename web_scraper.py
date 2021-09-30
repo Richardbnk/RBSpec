@@ -1,4 +1,4 @@
-"""
+nt"""
 # Developer: Richard Raphael Banak
 # Objective: Functions to simplify RPA - Webscrapping
 # Creation date: 2020-01-02
@@ -40,7 +40,8 @@ def open_url(url):
     driver.get(url)
 
 
-def do_action(action='click', element_type='xpath', element_path=None, wait_condition='is_visible', timeout=20, text=None, wait_before_action=0):
+def do_action(action='click', element_type='xpath', element_path=None, element_position=None, 
+              wait_condition='is_visible', timeout=20, text=None, wait_before_action=0):
 
     time.sleep(wait_before_action)
 
@@ -60,9 +61,11 @@ def do_action(action='click', element_type='xpath', element_path=None, wait_cond
 
     elif wait_condition == None:
         pass
-
     else:
         print('Parameter wait_condition incorrect')
+        
+    if element_position:
+        element = element[element_position]
 
     if action == 'click':
         element.click()
@@ -90,7 +93,6 @@ def do_action(action='click', element_type='xpath', element_path=None, wait_cond
     elif action == 'get_attribute':
         return element.get_attribute(text)
         
-
     elif action == 'wait':
         pass
 
@@ -98,6 +100,7 @@ def do_action(action='click', element_type='xpath', element_path=None, wait_cond
         print('Action parameter incorrect: {}'.format(action))
 
     return True
+
 
 def wait_element(element_type='xpath', element_path=None, wait_condition='is_visible', timeout=20, text=None, wait_before_action=0):
 
@@ -128,3 +131,4 @@ def delete_cookies():
 def driver_quit():
     driver.stop_client()
     driver.quit()
+    

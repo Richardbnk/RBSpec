@@ -40,8 +40,8 @@ def open_url(url):
     driver.get(url)
 
 
-def do_action(action='click', element_type='xpath', element_path=None, element_position=None, 
-              wait_condition='is_visible', timeout=20, text=None, wait_before_action=0):
+def do_action(action='click', element_type='xpath', element_path=None, wait_condition='is_visible', 
+              timeout=20, text=None, wait_before_action=0):
 
     time.sleep(wait_before_action)
 
@@ -63,9 +63,6 @@ def do_action(action='click', element_type='xpath', element_path=None, element_p
         pass
     else:
         print('Parameter wait_condition incorrect')
-        
-    if element_position:
-        element = element[element_position]
 
     if action == 'click':
         element.click()

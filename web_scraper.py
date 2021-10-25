@@ -18,14 +18,14 @@ import os
 import time
 
 
-def startSelenium(chrome_driver_path):
+def start_selenium(chrome_driver_path):
 
     global driver
 
-    if chrome_driver_path == None:
-        path_selenium = (r"C:\Users\{}\AppData\Local\SeleniumBasic\chromedriver.exe".format(os.environ["USERNAME"]))
-    else:
+    if chrome_driver_path:
         path_selenium = chrome_driver_path
+    else:
+        path_selenium = get_chrome_driver_path()
 
     options = webdriver.ChromeOptions()
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
@@ -33,6 +33,14 @@ def startSelenium(chrome_driver_path):
     return driver
 
 
+def get_chrome_driver_path():
+
+    if platform.system() == "Windows":
+        return os.path.join(os.path.expanduser("~"), 'chromedriver.exe')
+    else:
+        return os.path.join(os.path.expanduser("~"), 'Repositories', 'files', 'chromedriver')
+
+    
 def maximize_window():
     driver.maximize_window()
 

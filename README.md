@@ -22,4 +22,4 @@ pip install --upgrade git+https://github.com/Richardbnk/rpa/
 
 ### Requirements
 
-Para a utilização completa do pacote, por favor instale todos os requisistos constantes do arquivo `requirements.txt`
+Ao realizar o comando 'pip install', todos os requisitos serão atualizados com base no arquivo `requirements.txt`

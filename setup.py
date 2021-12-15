@@ -4,12 +4,12 @@ with open('requirements.txt') as f:
     required = f.read().splitlines()
 
 setuptools.setup(
-    name='rpa',
+    name='rbspec',
     version='1.0.0',
     author="Richard Raphael Banak",
-    description="Biblioteca de códigos para Processos RPA",
-    url="https://github.com/Richardbnk/rpa",
-    packages=['rpa'],
+    description="Robot Specialist Library for Robot Process Automation",
+    url="https://github.com/Richardbnk/RBSpec",
+    packages=['rbspec'],
     classifiers=[
         "Programming Language :: Python :: 3",
     ],

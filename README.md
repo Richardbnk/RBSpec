@@ -1,20 +1,20 @@
-# rpa
+# RBSpec - robot specialist
 
-## Pacote python com funções RPA
+## Python library to improve RPA Development
 
-### Autor
+### Author
 
-Nome: Richard Raphael Banak
+Name: Richard Raphael Banak
 
-### Instalação
+### Install
 
-Para instalar o pacote utilize o comando:
+To install, run the command:
 
 ```
 pip install git+https://github.com/Richardbnk/rpa/
 ```
 
-Para atualizar seu pacote utilize o comando:
+To update your packge use the command:
 
 ```
 pip install --upgrade git+https://github.com/Richardbnk/rpa/
@@ -22,4 +22,4 @@ pip install --upgrade git+https://github.com/Richardbnk/rpa/
 
 ### Requirements
 
-Ao realizar o comando 'pip install', todos os requisitos serão atualizados com base no arquivo `requirements.txt`
+When you use the 'pip install', all requirements will be installed based on the file`requirements.txt`

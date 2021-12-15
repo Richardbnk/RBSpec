@@ -22,4 +22,4 @@ pip install --upgrade git+https://github.com/Richardbnk/rpa/
 
 ### Requirements
 
-When you use the 'pip install', all requirements will be installed based on the file`requirements.txt`
+When you use the 'pip install', all requirements will be installed based on `requirements.txt`

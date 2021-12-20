@@ -1,3 +1,11 @@
+"""
+# Developer: Richard Raphael Banak
+# Objective: Functions to help ETL from files and other tools for python automation
+# Creation date: 2020-01-02
+"""
+
+# -*- coding: utf-8 -*-
+
 import glob
 import os
 import time

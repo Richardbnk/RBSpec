@@ -1,6 +1,6 @@
 # RBSpec - robot specialist
 
-## Python library to improve RPA Development
+## Python library to simplify RPA Development
 
 ### Author
 

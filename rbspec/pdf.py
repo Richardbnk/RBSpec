@@ -1,3 +1,10 @@
+"""
+# Developer: Richard Raphael Banak
+# Objective: Functions for simplify PDF scraping
+# Creation date: 2021-12-16
+"""
+
+# -*- coding: utf-8 -*-
 
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
@@ -42,4 +49,4 @@ def export_pdf_pages(page_list, file_path):
 
     pdf_writer = None
     
-    print("Arquivo Exportado: {file_name}".format(file_name=file_path))
+    print("File exported: {file_name}".format(file_name=file_path))

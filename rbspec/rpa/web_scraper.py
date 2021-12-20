@@ -1,6 +1,6 @@
 """
 # Developer: Richard Raphael Banak
-# Objective: Funções RPA de Webscrapping
+# Objective: RPA functions to simplify webscrapping
 # Creation date: 2020-01-02
 # Updated: 2020-11-16 / 2021-10-01
 """

@@ -266,12 +266,10 @@ def is_nan(value):
 
 def list_dir(path, suffix=None):
 
-    if platform.system() == 'Windows':
-        dir = '{}\\'.format(path)
-    else:
-        dir = path
+    if not path:
+        directory = get_downloads_path()
     
-    files = os.listdir(dir)
+    files = os.listdir(directory)
     
     if suffix:
         return [ filename for filename in files if filename.endswith( suffix ) ]

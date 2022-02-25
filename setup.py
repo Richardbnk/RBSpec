@@ -9,7 +9,12 @@ setuptools.setup(
     author="Richard Raphael Banak",
     description="Robot Specialist Library for Robot Process Automation",
     url="https://github.com/Richardbnk/RBSpec",
-    packages=['rbspec', 'rbspec.rpa'],
+    packages=['rbspec', 'rbspec/rpa'],
+    
+    package_dir={'':'rbspec'},
+    py_modules = ['web_scrapper']
+    
+    
     classifiers=[
         "Programming Language :: Python :: 3",
     ],

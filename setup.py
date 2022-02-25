@@ -12,7 +12,7 @@ setuptools.setup(
     packages=['rbspec', 'rbspec/rpa'],
     
     package_dir={'':'rbspec'},
-    py_modules = ['web_scrapper']
+    py_modules = ['web_scrapper'],
     
     
     classifiers=[

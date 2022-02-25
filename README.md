@@ -6,11 +6,11 @@
 
 Name: Richard Raphael Banak
 
-### Install
+### Installation
 
 To install, run the command:
 
-```
+```python
 pip install git+https://github.com/Richardbnk/RBSpec
 ```
 

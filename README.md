@@ -11,7 +11,7 @@ Name: Richard Raphael Banak
 To install, run the command:
 
 ```
-pip install -e git+https://github.com/Richardbnk/RBSpec
+pip install git+https://github.com/Richardbnk/RBSpec
 ```
 
 To update your packge use the command:

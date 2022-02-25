@@ -16,7 +16,7 @@ pip install git+https://github.com/Richardbnk/RBSpec
 
 To update your packge use the command:
 
-```
+```python
 pip install --upgrade git+https://github.com/Richardbnk/RBSpec
 ```
 

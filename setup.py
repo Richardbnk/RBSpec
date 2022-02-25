@@ -11,7 +11,6 @@ setuptools.setup(
     url="https://github.com/Richardbnk/RBSpec",
     packages=['rbspec', 'rbspec/rpa'],
     
-    package_dir={'':'rbspec'},
     py_modules = ['web_scrapper'],
     
     

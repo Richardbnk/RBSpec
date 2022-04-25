@@ -18,27 +18,46 @@ import os
 import time
 
 
-def start_selenium(chrome_driver_path):
+def startSelenium(driver_path=None, navigator="chrome", window_size=[1400, 900]):
 
     global driver
 
-    if chrome_driver_path:
-        path_selenium = chrome_driver_path
+    if driver_path:
+        path_selenium = driver_path
     else:
-        path_selenium = get_chrome_driver_path()
+        path_selenium = get_driver_path(navigator=navigator)
 
-    options = webdriver.ChromeOptions()
-    options.add_experimental_option("excludeSwitches", ["enable-logging"])
-    driver = webdriver.Chrome(executable_path=path_selenium, options=options)
+    if navigator == "chrome":
+        options = webdriver.ChromeOptions()
+        options.add_argument(f"--window-size={window_size[0]},{window_size[1]}")
+        options.add_experimental_option("excludeSwitches", ["enable-logging"])
+        driver = webdriver.Chrome(executable_path=path_selenium, options=options)
+        # https://chromedriver.chromium.org/downloads
+    elif navigator == "edge":
+        options = Options()
+        options.add_argument(f"--window-size={window_size[0]},{window_size[1]}")
+        driver = Edge(executable_path=path_selenium, capabilities={}, options=options)
+        # Resize current window to the set dimension
+        # driver.set_window_size(width=1200, height=800)
+        # https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
+
     return driver
 
 
-def get_chrome_driver_path():
+def get_driver_path(navigator="chrome"):
+    if navigator == "chrome":
+        file_name = "chromedriver"
+    elif navigator == "edge":
+        file_name = "msedgedriver"
+    else:
+        raise Exception("Wrong navigator (use navigator == ('edge' or 'chrome')")
 
     if platform.system() == "Windows":
-        return os.path.join(os.path.expanduser("~"), 'chromedriver.exe')
+        return os.path.join(
+            os.path.expanduser("~"), "Repositories", "files", f"{file_name}.exe"
+        )
     else:
-        return os.path.join(os.path.expanduser("~"), 'Repositories', 'files', 'chromedriver')
+        return os.path.join(os.path.expanduser("~"), "Repositories", "files", file_name)
 
     
 def maximize_window():

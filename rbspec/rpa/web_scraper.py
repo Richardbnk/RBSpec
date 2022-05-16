@@ -16,7 +16,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import os
 import time
-
+import platform
 
 def startSelenium(driver_path=None, navigator="chrome", window_size=[1400, 900]):
 

@@ -10,9 +10,11 @@
 from selenium import webdriver
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support import expected_conditions as EC
 
 import os
 import time
@@ -205,6 +207,9 @@ def do_action(
 
     elif action == "get_attribute":
         return element.get_attribute(text)
+
+    elif action == "hover":
+        ActionChains(driver).move_to_element(element).perform()
 
     elif action == "wait":
         pass
@@ -430,6 +435,27 @@ def get_attribute(
 ):
     return do_action(
         action="get_attribute",
+        element_type=element_type,
+        element_path=element_path,
+        element_at_position=element_at_position,
+        wait_condition=wait_condition,
+        timeout=timeout,
+        text=text,
+        wait_before_action=wait_before_action,
+    )
+
+
+def hover(
+    element_type="xpath",
+    element_path=None,
+    element_at_position=0,
+    wait_condition="is_visible",
+    timeout=20,
+    text=None,
+    wait_before_action=0,
+):
+    return do_action(
+        action="hover",
         element_type=element_type,
         element_path=element_path,
         element_at_position=element_at_position,

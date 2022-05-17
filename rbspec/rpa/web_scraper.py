@@ -18,6 +18,7 @@ import os
 import time
 import platform
 
+
 def startSelenium(driver_path=None, navigator="chrome", window_size=[1400, 900]):
 
     global driver
@@ -59,7 +60,7 @@ def get_driver_path(navigator="chrome"):
     else:
         return os.path.join(os.path.expanduser("~"), "Repositories", "files", file_name)
 
-    
+
 def maximize_window():
     driver.maximize_window()
 
@@ -68,29 +69,31 @@ def open_url(url):
     driver.get(url)
 
 
-def find_element(element_type="xpath", element_path=None, timeout=20, wait_condition="is_visible"):
+def find_element(
+    element_type="xpath", element_path=None, timeout=20, wait_condition="is_visible"
+):
 
     global driver
 
-    if wait_condition == "is_present":  
+    if wait_condition == "is_present":
         # Espera até que o elemento esteja presente no DOM
         element = WebDriverWait(driver, timeout).until(
             EC.presence_of_element_located((element_type, element_path))
         )
 
-    elif wait_condition == "is_visible":  
+    elif wait_condition == "is_visible":
         # Espera até que o elemento esteja visível
         element = WebDriverWait(driver, timeout).until(
             EC.visibility_of_element_located((element_type, element_path))
         )
 
-    elif wait_condition == "text_is_present" and text:  
+    elif wait_condition == "text_is_present" and text:
         # Espera até que o elemento contenha o texto da variavel text
         element = WebDriverWait(driver, timeout).until(
             EC.text_to_be_present_in_element((element_type, element_path), text)
         )
 
-    elif wait_condition == "is_clickable":  
+    elif wait_condition == "is_clickable":
         # Espera até que o elemento possa ser clicado
         element = WebDriverWait(driver, timeout).until(
             EC.element_to_be_clickable((element_type, element_path))
@@ -105,7 +108,9 @@ def find_element(element_type="xpath", element_path=None, timeout=20, wait_condi
     return element
 
 
-def find_elements(element_type="xpath", element_path=None, timeout=20, wait_condition="is_visible"):
+def find_elements(
+    element_type="xpath", element_path=None, timeout=20, wait_condition="is_visible"
+):
 
     global driver
 
@@ -121,15 +126,35 @@ def find_elements(element_type="xpath", element_path=None, timeout=20, wait_cond
             EC.visibility_of_all_elements_located((element_type, element_path))
         )
 
-    else: 
+    else:
         elements = driver.find_elements(element_type, element_path)
         pass
 
     return elements
 
 
-def do_action(action="click", element_type="xpath", element_path=None, element_at_position=0, wait_condition="is_visible", 
-    timeout=20, text=None, wait_before_action=0):
+def find_element_at_position(
+    element_type="xpath",
+    element_path=None,
+    element_at_position=0,
+    wait_condition="is_visible",
+    timeout=20,
+    text=None,
+    wait_before_action=0,
+):
+    pass
+
+
+def do_action(
+    action="click",
+    element_type="xpath",
+    element_path=None,
+    element_at_position=0,
+    wait_condition="is_visible",
+    timeout=20,
+    text=None,
+    wait_before_action=0,
+):
 
     time.sleep(wait_before_action)
 
@@ -137,12 +162,20 @@ def do_action(action="click", element_type="xpath", element_path=None, element_a
 
     # find element
     if element_at_position == 0:
-        element = find_element(element_type=element_type, element_path=element_path,
-                               timeout=timeout, wait_condition=wait_condition)
+        element = find_element(
+            element_type=element_type,
+            element_path=element_path,
+            timeout=timeout,
+            wait_condition=wait_condition,
+        )
     else:
-        element = find_elements(element_type=element_type, element_path=element_path,
-                                 timeout=timeout, wait_condition=wait_condition)[element_at_position]
-    
+        element = find_elements(
+            element_type=element_type,
+            element_path=element_path,
+            timeout=timeout,
+            wait_condition=wait_condition,
+        )[element_at_position]
+
     # do action
     if action == "click":
         element.click()
@@ -165,8 +198,9 @@ def do_action(action="click", element_type="xpath", element_path=None, element_a
 
     elif action == "show":
         attributes = driver.execute_script(
-            "var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;", 
-            element)
+            "var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;",
+            element,
+        )
         return attributes
 
     elif action == "get_attribute":
@@ -176,13 +210,20 @@ def do_action(action="click", element_type="xpath", element_path=None, element_a
         pass
 
     else:
-        raise Exception("Parâmetro Action está preenchido incorretamente: {}".format(action))
+        raise Exception(
+            "Parâmetro Action está preenchido incorretamente: {}".format(action)
+        )
 
     return True
 
 
-def wait_element(element_type="xpath", element_path=None, wait_condition="is_visible", timeout=20, 
-    wait_before_action=0):
+def wait_element(
+    element_type="xpath",
+    element_path=None,
+    wait_condition="is_visible",
+    timeout=20,
+    wait_before_action=0,
+):
 
     time.sleep(wait_before_action)
 
@@ -224,3 +265,176 @@ def close_last_openned_window(main_window_index=0, window_to_be_closed_index=1):
     except:
         # print('Nenhuma janela foi fechada')
         pass
+
+
+def click(
+    element_type="xpath",
+    element_path=None,
+    element_at_position=0,
+    wait_condition="is_visible",
+    timeout=20,
+    text=None,
+    wait_before_action=0,
+):
+    do_action(
+        action="click",
+        element_type=element_type,
+        element_path=element_path,
+        element_at_position=element_at_position,
+        wait_condition=wait_condition,
+        timeout=timeout,
+        text=text,
+        wait_before_action=wait_before_action,
+    )
+    return True
+
+
+def send_keys(
+    element_type="xpath",
+    element_path=None,
+    element_at_position=0,
+    wait_condition="is_visible",
+    timeout=20,
+    text=None,
+    wait_before_action=0,
+):
+    do_action(
+        action="send_keys",
+        element_type=element_type,
+        element_path=element_path,
+        element_at_position=element_at_position,
+        wait_condition=wait_condition,
+        timeout=timeout,
+        text=text,
+        wait_before_action=wait_before_action,
+    )
+    return True
+
+
+def clear(
+    element_type="xpath",
+    element_path=None,
+    element_at_position=0,
+    wait_condition="is_visible",
+    timeout=20,
+    text=None,
+    wait_before_action=0,
+):
+    do_action(
+        action="clear",
+        element_type=element_type,
+        element_path=element_path,
+        element_at_position=element_at_position,
+        wait_condition=wait_condition,
+        timeout=timeout,
+        text=text,
+        wait_before_action=wait_before_action,
+    )
+    return True
+
+
+def replace_text(
+    element_type="xpath",
+    element_path=None,
+    element_at_position=0,
+    wait_condition="is_visible",
+    timeout=20,
+    text=None,
+    wait_before_action=0,
+):
+    do_action(
+        action="replace_text",
+        element_type=element_type,
+        element_path=element_path,
+        element_at_position=element_at_position,
+        wait_condition=wait_condition,
+        timeout=timeout,
+        text=text,
+        wait_before_action=wait_before_action,
+    )
+    return True
+
+
+def get_text(
+    element_type="xpath",
+    element_path=None,
+    element_at_position=0,
+    wait_condition="is_visible",
+    timeout=20,
+    text=None,
+    wait_before_action=0,
+):
+    return do_action(
+        action="get_text",
+        element_type=element_type,
+        element_path=element_path,
+        element_at_position=element_at_position,
+        wait_condition=wait_condition,
+        timeout=timeout,
+        text=text,
+        wait_before_action=wait_before_action,
+    )
+
+
+def select_by_visible_text(
+    element_type="xpath",
+    element_path=None,
+    element_at_position=0,
+    wait_condition="is_visible",
+    timeout=20,
+    text=None,
+    wait_before_action=0,
+):
+    do_action(
+        action="select_by_visible_text",
+        element_type=element_type,
+        element_path=element_path,
+        element_at_position=element_at_position,
+        wait_condition=wait_condition,
+        timeout=timeout,
+        text=text,
+        wait_before_action=wait_before_action,
+    )
+    return True
+
+
+def show(
+    element_type="xpath",
+    element_path=None,
+    element_at_position=0,
+    wait_condition="is_visible",
+    timeout=20,
+    text=None,
+    wait_before_action=0,
+):
+    return do_action(
+        action="show",
+        element_type=element_type,
+        element_path=element_path,
+        element_at_position=element_at_position,
+        wait_condition=wait_condition,
+        timeout=timeout,
+        text=text,
+        wait_before_action=wait_before_action,
+    )
+
+
+def get_attribute(
+    element_type="xpath",
+    element_path=None,
+    element_at_position=0,
+    wait_condition="is_visible",
+    timeout=20,
+    text=None,
+    wait_before_action=0,
+):
+    return do_action(
+        action="get_attribute",
+        element_type=element_type,
+        element_path=element_path,
+        element_at_position=element_at_position,
+        wait_condition=wait_condition,
+        timeout=timeout,
+        text=text,
+        wait_before_action=wait_before_action,
+    )

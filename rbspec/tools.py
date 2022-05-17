@@ -153,22 +153,21 @@ def wait_file_download(directory=None, prefix=None, suffix=None, timeout=600):
     if directory == None:
         directory = get_downloads_path()
 
-    files = list_dir(path=directory, prefix=prefix, suffix=suffix)
-
     seconds = 0
     while seconds < timeout:
 
         try:
             file_path = sorted(
-                files,
+                list_dir(path=directory, prefix=prefix, suffix=suffix),
                 key=lambda x: os.path.getmtime(os.path.join(directory, x)),
                 reverse=True,
             )[0]
         except:
             pass
 
+        seconds += 1
+
         if ".crdownload" in str(file_path):
-            seconds += 1
             time.sleep(1)
         else:
             return True
@@ -176,22 +175,29 @@ def wait_file_download(directory=None, prefix=None, suffix=None, timeout=600):
     raise Exception("Timeout waitFileDownload Function")
 
 
-def get_last_downloaded_file(file_name_prefix=None, file_name_suffix=None):
-    file_list = list_dir(prefix=file_name_prefix, suffix=file_name_suffix)
+def get_last_downloaded_file(path=None, prefix=None, suffix=None):
+    if not path:
+        path = get_downloads_path()
 
-    return sorted(file_list, key=os.path.getmtime, reverse=True)[0]
+    file_list = list_dir(path=path, prefix=prefix, suffix=suffix)
+
+    last_file_name = sorted(
+        file_list, key=lambda x: os.path.getmtime(os.path.join(path, x)), reverse=True
+    )[0]
+
+    return os.path.join(path, last_file_name)
 
 
-def file_is_updated(filepath, referenceDate):
+def check_file_is_updated(filePath, referenceDate):
 
-    date = datetime.fromtimestamp(os.path.getctime(filepath)).strftime("%Y-%m-%d")
+    date = datetime.fromtimestamp(os.path.getmtime(filePath)).strftime("%Y-%m-%d")
 
     if date >= referenceDate:
         return True
     else:
         return False
 
-
+    
 def file_to_dataframe(
     filepath, encoding=None, engine="python", converters=None, dtype=None
 ):
@@ -291,6 +297,15 @@ def convert_number_to_datetime(number):
     return date
 
 
+def convert_datetime_to_format(
+    date, origin_format="%Y-%m-%d", destination_format="%d/%m/%Y"
+):
+    return convert_date_to_datetime(date=date, origin_format=origin_format).strftime(
+        destination_format
+    )
+
+
+
 def get_file_creation_date(filepath, dateFormat):
 
     if dateFormat == None:
@@ -343,6 +358,7 @@ def list_dir(path, prefix=None, suffix=None):
         files = [filename for filename in files if filename.endswith(suffix)]
 
     return files
+
 
 
 def get_downloads_path():

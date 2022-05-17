@@ -281,7 +281,7 @@ def click(
     text=None,
     wait_before_action=0,
 ):
-    do_action(
+    return do_action(
         action="click",
         element_type=element_type,
         element_path=element_path,
@@ -291,7 +291,6 @@ def click(
         text=text,
         wait_before_action=wait_before_action,
     )
-    return True
 
 
 def send_keys(
@@ -303,7 +302,7 @@ def send_keys(
     text=None,
     wait_before_action=0,
 ):
-    do_action(
+    return do_action(
         action="send_keys",
         element_type=element_type,
         element_path=element_path,
@@ -313,7 +312,6 @@ def send_keys(
         text=text,
         wait_before_action=wait_before_action,
     )
-    return True
 
 
 def clear(
@@ -325,7 +323,7 @@ def clear(
     text=None,
     wait_before_action=0,
 ):
-    do_action(
+    return do_action(
         action="clear",
         element_type=element_type,
         element_path=element_path,
@@ -335,7 +333,6 @@ def clear(
         text=text,
         wait_before_action=wait_before_action,
     )
-    return True
 
 
 def replace_text(
@@ -347,7 +344,7 @@ def replace_text(
     text=None,
     wait_before_action=0,
 ):
-    do_action(
+    return do_action(
         action="replace_text",
         element_type=element_type,
         element_path=element_path,
@@ -357,7 +354,6 @@ def replace_text(
         text=text,
         wait_before_action=wait_before_action,
     )
-    return True
 
 
 def get_text(
@@ -390,7 +386,7 @@ def select_by_visible_text(
     text=None,
     wait_before_action=0,
 ):
-    do_action(
+    return do_action(
         action="select_by_visible_text",
         element_type=element_type,
         element_path=element_path,
@@ -400,7 +396,6 @@ def select_by_visible_text(
         text=text,
         wait_before_action=wait_before_action,
     )
-    return True
 
 
 def show(

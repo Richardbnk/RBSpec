@@ -33,6 +33,17 @@ def startSelenium(driver_path=None, navigator="chrome", window_size=[1400, 900])
         options = webdriver.ChromeOptions()
         options.add_argument(f"--window-size={window_size[0]},{window_size[1]}")
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
+        options.add_experimental_option(
+            "prefs",
+            {
+                "download.default_directory": os.path.join(
+                    os.path.expanduser("~"), "Downloads"
+                ),  # Change default directory for downloads
+                "download.prompt_for_download": False,  # To auto download the file
+                # "download.directory_upgrade": True,
+                "plugins.always_open_pdf_externally": True,  # It will not show PDF directly in chrome
+            },
+        )
         driver = webdriver.Chrome(executable_path=path_selenium, options=options)
         # https://chromedriver.chromium.org/downloads
     elif navigator == "edge":

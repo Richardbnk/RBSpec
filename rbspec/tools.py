@@ -370,7 +370,7 @@ def get_file_name_from_path(path):
     return os.path.basename(path)
 
 
-def load_env(path):
+def load_env(path=None):
     if not path:
         path = os.path.join(os.path.expanduser('~'), 'Repositories', 'files', '.env')
     load_dotenv(dotenv_path=Path(path))

@@ -2,3 +2,4 @@ pandas >= 1.2.5
 PyPDF2 >= 1.26.0
 xlwings >= 0.24.9
 selenium >= 3.141.0
+python-dotenv >= 0.20.0

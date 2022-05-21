@@ -397,10 +397,9 @@ def load_log():
     logger.addHandler(ch1)
 
     logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
     
     # print to console
-    logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
+    #logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
     
     return logger
 

@@ -1,3 +1,4 @@
+import rbspec
 from rbspec import tools
 
 log = tools.load_log()

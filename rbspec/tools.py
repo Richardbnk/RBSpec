@@ -392,12 +392,12 @@ def load_log():
     logger = logging.getLogger(__name__)
     
     ch1 = logging.StreamHandler()
-    ch1.setLevel(logging.DEBUG)
+    ch1.setLevel(logging.INFO)
     ch1.setFormatter(formatter)
     logger.addHandler(ch1)
 
     logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.INFO)
     
     # print to console
     logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))

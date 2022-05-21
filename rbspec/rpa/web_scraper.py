@@ -15,6 +15,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
+from selenium.webdriver.remote.remote_connection import LOGGER
+
 import os
 import time
 import platform
@@ -28,6 +30,8 @@ def startSelenium(driver_path=None, navigator="chrome", window_size=[1400, 900])
         path_selenium = driver_path
     else:
         path_selenium = get_driver_path(navigator=navigator)
+        
+    LOGGER.setLevel(30) # set to logging.WARNING value (30)
 
     if navigator == "chrome":
         options = webdriver.ChromeOptions()

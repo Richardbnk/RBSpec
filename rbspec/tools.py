@@ -11,6 +11,7 @@ import os
 import time
 import pandas as pd
 import platform
+import logging
 
 from pathlib import Path
 from datetime import datetime, timedelta
@@ -374,3 +375,12 @@ def load_env(path=None):
     if not path:
         path = os.path.join(os.path.expanduser('~'), 'Repositories', 'files', '.env')
     load_dotenv(dotenv_path=Path(path))
+    
+    
+def load_log():
+
+    log_format = "%(asctime)s - %(levelname)s: %(message)s"
+
+    logging.basicConfig(level=logging.DEBUG, format=log_format, filemode="a")
+
+    return logging.getLogger()

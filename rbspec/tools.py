@@ -27,9 +27,7 @@ def main():
     global log
     log = load_log()
     tools.load_env()
-    
-if __name__ == '__main__':  
-    main()
+   
 
 def date(delta_days=None, delta_months=None, delta_years=None, date_format="%Y-%m-%d"):
     """
@@ -401,3 +399,7 @@ def load_log():
     logger = logging.getLogger()
     
     return logger
+
+
+if __name__ == '__main__':  
+    main()

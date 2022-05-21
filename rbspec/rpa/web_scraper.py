@@ -31,7 +31,7 @@ def startSelenium(driver_path=None, navigator="chrome", window_size=[1400, 900])
     else:
         path_selenium = get_driver_path(navigator=navigator)
         
-    LOGGER.setLevel(30) # set to logging.WARNING value (30)
+    LOGGER.setLevel(50) # set to logging.WARNING value (30)
 
     if navigator == "chrome":
         options = webdriver.ChromeOptions()

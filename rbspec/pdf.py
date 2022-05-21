@@ -6,6 +6,7 @@
 
 # -*- coding: utf-8 -*-
 
+from .process import log
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 def read_pdf(file_path):
@@ -49,4 +50,4 @@ def export_pdf_pages(page_list, file_path):
 
     pdf_writer = None
     
-    print("File exported: {file_name}".format(file_name=file_path))
+    log.info("File exported: {file_name}".format(file_name=file_path))

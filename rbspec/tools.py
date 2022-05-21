@@ -382,10 +382,13 @@ def load_log():
     formatter = "%(asctime)s - %(levelname)s: %(message)s"
 
     logger = logging.getLogger(__name__)
+    
     ch1 = logging.StreamHandler()
     ch1.setLevel(logging.DEBUG)
     ch1.setFormatter(formatter)
+    
     logger.addHandler(ch1)
-
+    
     logger = logging.getLogger()
+    
     return logger

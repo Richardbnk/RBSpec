@@ -21,11 +21,15 @@ import xlwings as xw
 import json
 from dotenv import load_dotenv
     
-log = load_log()
+log = None
 
-def start_new_process():
+def main():
+    global log
+    log = load_log()
     tools.load_env()
     
+if __name__ == '__main__':  
+    main()
 
 def date(delta_days=None, delta_months=None, delta_years=None, date_format="%Y-%m-%d"):
     """

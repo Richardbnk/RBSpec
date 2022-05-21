@@ -389,18 +389,21 @@ def load_log():
 
     formatter = "%(asctime)s - %(levelname)s: %(message)s"
 
-    logger = logging.getLogger(__name__)
+    #logger = logging.getLogger(__name__)
     
-    ch1 = logging.StreamHandler()
-    ch1.setLevel(logging.DEBUG)
-    ch1.setFormatter(formatter)
-    logger.addHandler(ch1)
+    logging.basicConfig(level=logging.DEBUG, 
+                        format=formatter)
+    
+    #ch1 = logging.StreamHandler()
+    #ch1.setLevel(logging.DEBUG)
+    #ch1.setFormatter(formatter)
+    #logger.addHandler(ch1)
 
-    logger = logging.getLogger()
+    #logger = logging.getLogger()
     
     # print to console
     #logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
     
-    return logger
+    return logging
 
 

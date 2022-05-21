@@ -387,23 +387,18 @@ def load_env(path=None):
     
 def load_log():
 
-    formatter = "%(asctime)s - %(levelname)s: %(message)s"
+    formatter = logging.Formatter('%(levelname)s: %(asctime)s - %(message)s')
 
-    #logger = logging.getLogger(__name__)
+	logger = logging.getLogger()
     
-    logging.basicConfig(level=logging.DEBUG, 
-                        format=formatter)
+    ch3 = logging.StreamHandler()
+	ch3.setLevel(logging.DEBUG)
+	ch3.setFormatter(formatter)
+	logger.addHandler(ch3)
     
-    #ch1 = logging.StreamHandler()
-    #ch1.setLevel(logging.DEBUG)
-    #ch1.setFormatter(formatter)
-    #logger.addHandler(ch1)
+    logger.setLevel(logging.DEBUG)
 
-    #logger = logging.getLogger()
+	return logger
     
-    # print to console
-    #logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
-    
-    return logging
 
 

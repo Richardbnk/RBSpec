@@ -6,6 +6,7 @@
 
 # -*- coding: utf-8 -*-
 
+import sys
 import glob
 import os
 import time
@@ -393,10 +394,13 @@ def load_log():
     ch1 = logging.StreamHandler()
     ch1.setLevel(logging.DEBUG)
     ch1.setFormatter(formatter)
-    
     logger.addHandler(ch1)
-    
+
     logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+    
+    # print to console
+    logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
     
     return logger
 

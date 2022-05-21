@@ -21,6 +21,7 @@ import xlwings as xw
 import json
 from dotenv import load_dotenv
 
+log = load_log()
 
 def date(delta_days=None, delta_months=None, delta_years=None, date_format="%Y-%m-%d"):
     """

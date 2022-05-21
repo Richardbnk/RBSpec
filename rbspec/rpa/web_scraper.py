@@ -16,6 +16,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 
 from selenium.webdriver.remote.remote_connection import LOGGER
+from urllib3.connectionpool import log as urllibLogger
+
 
 import os
 import time
@@ -30,8 +32,10 @@ def startSelenium(driver_path=None, navigator="chrome", window_size=[1400, 900])
         path_selenium = driver_path
     else:
         path_selenium = get_driver_path(navigator=navigator)
-        
+    
+    # supress logging
     LOGGER.setLevel(60) # set to logging.WARNING value (30)
+    urllibLogger.setLevel(60)
 
     if navigator == "chrome":
         options = webdriver.ChromeOptions()

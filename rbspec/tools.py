@@ -13,6 +13,7 @@ import time
 import pandas as pd
 import platform
 import logging
+import re
 
 from pathlib import Path
 from datetime import datetime, timedelta
@@ -400,5 +401,6 @@ def load_log():
 	
     return logger
     
-
+def get_numbers_from_string(string):
+    re.findall(r'\d+', string)
 

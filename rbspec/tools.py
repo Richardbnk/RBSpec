@@ -396,7 +396,7 @@ def load_log():
     ch3.setFormatter(formatter)
     logger.addHandler(ch3)
 	
-    #logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.DEBUG)
 	
     return logger
     

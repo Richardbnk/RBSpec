@@ -5,7 +5,7 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name='rbspec',
-    version='1.0.28',
+    version='1.0.29',
     author="Richard Raphael Banak",
     description="Robot Specialist Library for Robot Process Automation",
     url="https://github.com/Richardbnk/RBSpec",

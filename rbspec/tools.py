@@ -392,7 +392,7 @@ def load_log():
     logger = logging.getLogger(__name__)
     
     ch1 = logging.StreamHandler()
-    ch1.setLevel(logging.INFO)
+    ch1.setLevel(logging.DEBUG)
     ch1.setFormatter(formatter)
     logger.addHandler(ch1)
 

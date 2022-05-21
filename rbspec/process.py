@@ -1,5 +1,4 @@
-import rbspec
-from rbspec import tools
+from . import tools
 
 log = tools.load_log()
 tools.load_env()

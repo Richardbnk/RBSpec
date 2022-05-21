@@ -402,5 +402,5 @@ def load_log():
     return logger
     
 def get_numbers_from_string(string):
-    re.findall(r'\d+', string)
+    return re.findall(r'\d+', string)
 

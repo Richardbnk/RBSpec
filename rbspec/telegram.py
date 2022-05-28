@@ -18,7 +18,5 @@ def send(
     chat_id,
     bot_token,
 ):
-    global BOT_API_TOKEN
-
     bot = telegram.Bot(token=bot_token)
     bot.sendMessage(chat_id=chat_id, text=message)

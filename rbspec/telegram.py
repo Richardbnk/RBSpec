@@ -13,7 +13,6 @@ import urllib
 import json
 
 
-
 def send(
     message,
     chat_id,

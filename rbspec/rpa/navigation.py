@@ -39,7 +39,7 @@ def get_window_size():
 def get_mouse_position(print_log=True):
     point = pyautogui.position()
     if print_log:
-        print(f"move_mouse_to(x={point.x}, y={point.y})")
+        print(f"nv.move_mouse_to(x={point.x}, y={point.y})\n")
     return point
 
 

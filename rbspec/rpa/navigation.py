@@ -5,6 +5,7 @@
 """
 
 import pyautogui
+from datetime import datetime
 
 """ Keys of the keyboard:
 \t, \n, \r,  , !, ", #, $, %, &, ', (,

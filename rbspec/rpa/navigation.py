@@ -114,7 +114,7 @@ def get_image_position(image_path, timeout=None):
 
 def click_at_image(image_path, timeout=None):
     x, y = get_image_position(image_path=image_path, timeout=timeout)
-    nv.click(x=x, y=y)
+    click(x=x, y=y)
     
     
 def wait_for_image(image_path, timeout=None):

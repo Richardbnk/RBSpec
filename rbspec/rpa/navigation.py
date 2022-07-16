@@ -54,15 +54,15 @@ def move_mouse_relative(x, y, duration=0):
 
 def click(x, y):
     pyautogui.click(x=x, y=y)
-    
+
 
 def drag_mouse_to(x=0, y=0, duration=1):
-    pyautogui.dragTo(x=x, y=y, duration=duration, button='left')
-    
-    
+    pyautogui.dragTo(x=x, y=y, duration=duration, button="left")
+
+
 def mouse_scroll(y=-1000):
     pyautogui.scroll(y)
-    
+
 
 # keyboard
 def key_press_and_hold(key):
@@ -72,6 +72,7 @@ def key_press_and_hold(key):
 def key_press_and_release(key):
     pyautogui.keyUp(key)
 
+
 def type_text(text):
     pyautogui.typewrite(text)
 
@@ -80,6 +81,39 @@ def type_List(key_list):
     # a, left, ctrlleft
     pyautogui.typewrite(list)
 
+
 def hotkey(*args):
     # ex: args = "ctrlleft", "a"
     pyautogui.hotkey(*args)
+
+
+# search elements
+def get_image_position(image_path, timeout=None):
+    time_count = 0.0
+    element_exists = False
+
+    while not element_exists:
+        box = None
+        box = pyautogui.locateOnScreen(image_path)
+
+        if box != None:
+            element_exists = True
+
+        if timeout:
+            # time.sleep(1) #locate screen takes time
+            time_count += 1
+            print(time_count)
+
+            if time_count > timeout:
+                raise Exception(f"Timeout, image not found: {image_path}")
+
+    # press on the middle of the image
+    x = box.left + (box.width / 2)
+    y = box.top + (box.height / 2)
+
+    return x, y
+
+
+def click_at_image(image_path, timeout=None):
+    x, y = get_image_position(image_path=image_path, timeout=timeout)
+    nv.click(x=x, y=y)

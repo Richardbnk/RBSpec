@@ -35,6 +35,7 @@ command, option, optionleft, optionright
 def get_window_size():
     return pyautogui.size()
 
+
 # mouse
 def get_mouse_position(print_log=True):
     point = pyautogui.position()
@@ -57,6 +58,11 @@ def click(x, y):
 
 def drag_mouse_to(x=0, y=0, duration=1):
     pyautogui.dragTo(x=x, y=y, duration=duration, button='left')
+    
+    
+def mouse_scroll(y=-1000):
+    pyautogui.scroll(y)
+    
 
 # keyboard
 def key_press_and_hold(key):

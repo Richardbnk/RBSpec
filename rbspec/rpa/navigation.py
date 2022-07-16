@@ -89,7 +89,7 @@ def hotkey(*args):
 
 # search elements
 def get_image_position(image_path, timeout=None):
-    time_count = 0.0
+    start_time = datetime.now()
     element_exists = False
 
     while not element_exists:
@@ -100,11 +100,8 @@ def get_image_position(image_path, timeout=None):
             element_exists = True
 
         if timeout:
-            # time.sleep(1) #locate screen takes time
-            time_count += 1
-            print(time_count)
-
-            if time_count > timeout:
+            time_delta = datetime.now() - start_time
+            if time_delta.total_seconds() >= timeout:
                 raise Exception(f"Timeout, image not found: {image_path}")
 
     # press on the middle of the image

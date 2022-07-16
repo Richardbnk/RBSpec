@@ -53,6 +53,10 @@ def move_mouse_relative(x, y, duration=0):
 
 def click(x, y):
     pyautogui.click(x=x, y=y)
+    
+
+def drag_mouse_to(x, y, duration=1):
+    pyautogui.dragTo(x=x, y=y, duration=duration, button='left')
 
 # keyboard
 def key_press_and_hold(key):

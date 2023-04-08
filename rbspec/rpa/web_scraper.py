@@ -24,7 +24,15 @@ import time
 import platform
 
 
-def startSelenium(driver_path=None, navigator="chrome", window_size=[1400, 900]):
+def startSelenium(
+    driver_path=None,
+    navigator="chrome",
+    window_size=[1400, 900],
+    user_data_dir="/Users/richardb/Library/Application Support/Google/Chrome/Default",
+):
+    """
+    To find user-data-dir enter chrome://version and get "Profile Path" of the current chrome profile
+    """
 
     global driver
 
@@ -32,14 +40,18 @@ def startSelenium(driver_path=None, navigator="chrome", window_size=[1400, 900])
         path_selenium = driver_path
     else:
         path_selenium = get_driver_path(navigator=navigator)
-    
+
     # supress logging
-    LOGGER.setLevel(60) # set to logging.WARNING value (30)
+    LOGGER.setLevel(60)  # set to logging.WARNING value (30)
     urllibLogger.setLevel(60)
 
     if navigator == "chrome":
         options = webdriver.ChromeOptions()
         options.add_argument(f"--window-size={window_size[0]},{window_size[1]}")
+        options.add_argument("--disable-blink-features=AutomationControlled")
+        # options.add_argument("--incognito")
+
+        options.add_argument(f"user-data-dir={user_data_dir}")
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
         options.add_experimental_option(
             "prefs",
@@ -81,19 +93,30 @@ def get_driver_path(navigator="chrome"):
         return os.path.join(os.path.expanduser("~"), "Repositories", "files", file_name)
 
 
-def maximize_window():
+def maximize_window(driver):
+
     driver.maximize_window()
 
 
-def open_url(url):
+def get_driver(d):
+    if d:
+        return d
+    else:
+        global driver
+        return driver
+
+
+def open_url(driver, url):
     driver.get(url)
 
 
 def find_element(
-    element_type="xpath", element_path=None, timeout=20, wait_condition="is_visible"
+    driver,
+    element_type="xpath",
+    element_path=None,
+    timeout=20,
+    wait_condition="is_visible",
 ):
-
-    global driver
 
     if wait_condition == "is_present":
         # Espera até que o elemento esteja presente no DOM
@@ -129,10 +152,12 @@ def find_element(
 
 
 def find_elements(
-    element_type="xpath", element_path=None, timeout=20, wait_condition="is_visible"
+    driver,
+    element_type="xpath",
+    element_path=None,
+    timeout=20,
+    wait_condition="is_visible",
 ):
-
-    global driver
 
     if wait_condition == "is_present":
         # Espera até que o elemento esteja presente no DOM
@@ -154,6 +179,7 @@ def find_elements(
 
 
 def find_element_at_position(
+    driver,
     element_type="xpath",
     element_path=None,
     element_at_position=0,
@@ -166,6 +192,7 @@ def find_element_at_position(
 
 
 def do_action(
+    driver,
     action="click",
     element_type="xpath",
     element_path=None,
@@ -183,6 +210,7 @@ def do_action(
     # find element
     if element_at_position == 0:
         element = find_element(
+            driver=driver,
             element_type=element_type,
             element_path=element_path,
             timeout=timeout,
@@ -190,6 +218,7 @@ def do_action(
         )
     else:
         element = find_elements(
+            driver=driver,
             element_type=element_type,
             element_path=element_path,
             timeout=timeout,
@@ -241,6 +270,7 @@ def do_action(
 
 
 def wait_element(
+    driver,
     element_type="xpath",
     element_path=None,
     wait_condition="is_visible",
@@ -261,7 +291,9 @@ def wait_element(
         )
 
 
-def element_exists(element_type="xpath", element_path=None, wait_before_action=0):
+def element_exists(
+    driver, element_type="xpath", element_path=None, wait_before_action=0
+):
 
     time.sleep(wait_before_action)
     try:
@@ -271,16 +303,16 @@ def element_exists(element_type="xpath", element_path=None, wait_before_action=0
     return True
 
 
-def delete_cookies():
+def delete_cookies(driver):
     driver.delete_all_cookies()
 
 
-def driver_quit():
+def driver_quit(driver):
     driver.stop_client()
     driver.quit()
 
 
-def close_last_openned_window(main_window_index=0, window_to_be_closed_index=1):
+def close_last_openned_window(driver, main_window_index=0, window_to_be_closed_index=1):
     try:
         driver.switch_to.window(driver.window_handles[window_to_be_closed_index])
         driver.close()
@@ -291,6 +323,7 @@ def close_last_openned_window(main_window_index=0, window_to_be_closed_index=1):
 
 
 def click(
+    driver,
     element_type="xpath",
     element_path=None,
     element_at_position=0,
@@ -300,6 +333,7 @@ def click(
     wait_before_action=0,
 ):
     return do_action(
+        driver=driver,
         action="click",
         element_type=element_type,
         element_path=element_path,
@@ -312,6 +346,7 @@ def click(
 
 
 def send_keys(
+    driver,
     element_type="xpath",
     element_path=None,
     element_at_position=0,
@@ -321,6 +356,7 @@ def send_keys(
     wait_before_action=0,
 ):
     return do_action(
+        driver=driver,
         action="send_keys",
         element_type=element_type,
         element_path=element_path,
@@ -333,6 +369,7 @@ def send_keys(
 
 
 def clear(
+    driver,
     element_type="xpath",
     element_path=None,
     element_at_position=0,
@@ -342,6 +379,7 @@ def clear(
     wait_before_action=0,
 ):
     return do_action(
+        driver=driver,
         action="clear",
         element_type=element_type,
         element_path=element_path,
@@ -354,6 +392,7 @@ def clear(
 
 
 def replace_text(
+    driver,
     element_type="xpath",
     element_path=None,
     element_at_position=0,
@@ -363,6 +402,7 @@ def replace_text(
     wait_before_action=0,
 ):
     return do_action(
+        driver=driver,
         action="replace_text",
         element_type=element_type,
         element_path=element_path,
@@ -375,6 +415,7 @@ def replace_text(
 
 
 def get_text(
+    driver,
     element_type="xpath",
     element_path=None,
     element_at_position=0,
@@ -384,6 +425,7 @@ def get_text(
     wait_before_action=0,
 ):
     return do_action(
+        driver=driver,
         action="get_text",
         element_type=element_type,
         element_path=element_path,
@@ -396,6 +438,7 @@ def get_text(
 
 
 def select_by_visible_text(
+    driver,
     element_type="xpath",
     element_path=None,
     element_at_position=0,
@@ -405,6 +448,7 @@ def select_by_visible_text(
     wait_before_action=0,
 ):
     return do_action(
+        driver=driver,
         action="select_by_visible_text",
         element_type=element_type,
         element_path=element_path,
@@ -417,6 +461,7 @@ def select_by_visible_text(
 
 
 def show(
+    driver,
     element_type="xpath",
     element_path=None,
     element_at_position=0,
@@ -426,6 +471,7 @@ def show(
     wait_before_action=0,
 ):
     return do_action(
+        driver=driver,
         action="show",
         element_type=element_type,
         element_path=element_path,
@@ -438,6 +484,7 @@ def show(
 
 
 def get_attribute(
+    driver,
     element_type="xpath",
     element_path=None,
     element_at_position=0,
@@ -447,6 +494,7 @@ def get_attribute(
     wait_before_action=0,
 ):
     return do_action(
+        driver=driver,
         action="get_attribute",
         element_type=element_type,
         element_path=element_path,
@@ -459,6 +507,7 @@ def get_attribute(
 
 
 def hover(
+    driver,
     element_type="xpath",
     element_path=None,
     element_at_position=0,
@@ -468,6 +517,7 @@ def hover(
     wait_before_action=0,
 ):
     return do_action(
+        driver=driver,
         action="hover",
         element_type=element_type,
         element_path=element_path,

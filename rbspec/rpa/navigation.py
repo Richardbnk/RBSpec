@@ -75,12 +75,12 @@ def key_press_and_release(key):
 
 
 def type_text(text):
-    pyautogui.typewrite(text)
+    pyautogui.typewrite(str(text))
 
 
 def type_List(key_list):
     # a, left, ctrlleft
-    pyautogui.typewrite(list)
+    pyautogui.typewrite(key_list)
 
 
 def hotkey(*args):

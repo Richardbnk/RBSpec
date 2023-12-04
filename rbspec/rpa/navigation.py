@@ -109,6 +109,8 @@ def get_image_position(image_path, timeout=None):
             time_delta = datetime.now() - start_time
             if time_delta.total_seconds() >= timeout:
                 raise Exception(f"Timeout, image not found: {image_path}")
+        else:
+            element_exists = False
 
     # press on the middle of the image
     x = box.left + (box.width / 2)

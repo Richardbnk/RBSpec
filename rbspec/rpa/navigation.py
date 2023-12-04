@@ -78,6 +78,11 @@ def type_text(text):
     pyautogui.typewrite(str(text))
 
 
+def type_characters(text):
+    for i in str(text):
+        pyautogui.typewrite(i)
+
+
 def type_List(key_list):
     # a, left, ctrlleft
     pyautogui.typewrite(key_list)
